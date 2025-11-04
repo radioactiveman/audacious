@@ -35,6 +35,7 @@ SRCS = adder.cc \
        playlist-data.cc \
        playlist-files.cc \
        playlist-utils.cc \
+       plugin.cc \
        plugin-init.cc \
        plugin-load.cc \
        plugin-registry.cc \

@@ -80,6 +80,8 @@ static TransportPlugin * lookup_transport(const char * filename, String & error,
     return nullptr;
 }
 
+String VFSImpl::get_metadata(const char * field) { return String(); }
+
 /**
  * Opens a stream from a VFS transport using one of the registered
  * #VFSConstructor handlers.

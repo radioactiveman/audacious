@@ -43,6 +43,8 @@ ColorButton::ColorButton(QWidget * parent) : QPushButton(parent)
     });
 }
 
+ColorButton::~ColorButton() = default;
+
 void ColorButton::setColor(const QColor & color)
 {
     if (color != m_color)
@@ -53,6 +55,8 @@ void ColorButton::setColor(const QColor & color)
         onColorChanged();
     }
 }
+
+void ColorButton::onColorChanged() {}
 
 void ColorButton::paintEvent(QPaintEvent * event)
 {

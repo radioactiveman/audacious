@@ -39,13 +39,13 @@ public:
     virtual void clear() = 0;
 
     /* 512 frames of a single-channel PCM signal */
-    virtual void render_mono_pcm(const float * pcm) {}
+    virtual void render_mono_pcm(const float * pcm);
 
     /* 512 frames of an interleaved multi-channel PCM signal */
-    virtual void render_multi_pcm(const float * pcm, int channels) {}
+    virtual void render_multi_pcm(const float * pcm, int channels);
 
     /* intensity of frequencies 1/512, 2/512, ..., 256/512 of sample rate */
-    virtual void render_freq(const float * freq) {}
+    virtual void render_freq(const float * freq);
 
     /* common math for rendering a frequency graph (see util.cc) */
     static void compute_log_xscale(float * xscale, int bands);

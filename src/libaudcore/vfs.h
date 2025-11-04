@@ -112,7 +112,7 @@ public:
     virtual int ftruncate(int64_t length) = 0;
     virtual int fflush() = 0;
 
-    virtual String get_metadata(const char * field) { return String(); }
+    virtual String get_metadata(const char * field);
 };
 
 class VFSFile

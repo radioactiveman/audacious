@@ -129,13 +129,10 @@ public:
     const PluginType type;
     const PluginInfo info;
 
-    virtual bool init() { return true; }
-    virtual void cleanup() {}
+    virtual bool init();
+    virtual void cleanup();
 
-    virtual int take_message(const char * code, const void * data, int size)
-    {
-        return -1;
-    }
+    virtual int take_message(const char * code, const void * data, int size);
 };
 
 class LIBAUDCORE_PUBLIC TransportPlugin : public Plugin
@@ -154,15 +151,9 @@ public:
                             String & error) = 0;
 
     virtual VFSFileTest test_file(const char * filename, VFSFileTest test,
-                                  String & error)
-    {
-        return VFSFileTest(0);
-    }
+                                  String & error);
 
-    virtual Index<String> read_folder(const char * filename, String & error)
-    {
-        return Index<String>();
-    }
+    virtual Index<String> read_folder(const char * filename, String & error);
 };
 
 class LIBAUDCORE_PUBLIC PlaylistPlugin : public Plugin
@@ -194,10 +185,7 @@ public:
      * title: title of playlist (in)
      * items: playlist entries (in) */
     virtual bool save(const char * path, VFSFile & file, const char * title,
-                      const Index<PlaylistAddItem> & items)
-    {
-        return false;
-    }
+                      const Index<PlaylistAddItem> & items);
 };
 
 class LIBAUDCORE_PUBLIC OutputPlugin : public Plugin
@@ -227,7 +215,7 @@ public:
 
     /* Sets information about the song being played.  This function will be
      * called before open_audio(). */
-    virtual void set_info(const char * filename, const Tuple & tuple) {}
+    virtual void set_info(const char * filename, const Tuple & tuple);
 
     /* Begins playback of a PCM stream.  <format> is one of the FMT_*
      * enumeration values defined in libaudcore/audio.h.  Returns true on
@@ -298,23 +286,20 @@ public:
      * perform crossfading).  The flush() function should return false in this
      * case to prevent flush() from being called in downstream effect plugins.
      */
-    virtual bool flush(bool force) { return true; }
+    virtual bool flush(bool force);
 
     /* Exactly like process() except that any buffers should be drained (i.e.
      * the data processed and returned).  finish() will be called a second time
      * at the end of the last song in the playlist. */
-    virtual Index<float> & finish(Index<float> & data, bool end_of_playlist)
-    {
-        return process(data);
-    }
+    virtual Index<float> & finish(Index<float> & data, bool end_of_playlist);
 
     /* Required only for plugins that change the time domain (e.g. a time
-     * stretch) or use read-ahead buffering.  translate_delay() must do two
+     * stretch) or use read-ahead buffering.  adjust_delay() must do two
      * things: first, translate <delay> (which is in milliseconds) from the
      * output time domain back to the input time domain; second, increase
      * <delay> by the size of the read-ahead buffer.  It should return the
      * adjusted delay. */
-    virtual int adjust_delay(int delay) { return delay; }
+    virtual int adjust_delay(int delay);
 };
 
 enum class InputKey
@@ -427,18 +412,12 @@ public:
 
     /* Optional.  Writes metadata to the file, returning false on error. */
     virtual bool write_tuple(const char * filename, VFSFile & file,
-                             const Tuple & tuple)
-    {
-        return false;
-    }
+                             const Tuple & tuple);
 
     /* Optional.  Displays a window showing info about the file.  In general,
      * this function should be avoided since Audacious already provides a file
      * info window. */
-    virtual bool file_info_box(const char * filename, VFSFile & file)
-    {
-        return false;
-    }
+    virtual bool file_info_box(const char * filename, VFSFile & file);
 
 protected:
     /* Prepares the output system for playback in the specified format.  Also
@@ -489,10 +468,10 @@ public:
     }
 
     /* GtkWidget * get_gtk_widget () */
-    virtual void * get_gtk_widget() { return nullptr; }
+    virtual void * get_gtk_widget();
 
     /* QWidget * get_qt_widget () */
-    virtual void * get_qt_widget() { return nullptr; }
+    virtual void * get_qt_widget();
 };
 
 class LIBAUDCORE_PUBLIC GeneralPlugin : public DockablePlugin
@@ -537,7 +516,7 @@ public:
                                  const char * icon) = 0;
     virtual void plugin_menu_remove(AudMenuID id, void func()) = 0;
 
-    virtual void startup_notify(const char * id) {}
+    virtual void startup_notify(const char * id);
 };
 
 #endif

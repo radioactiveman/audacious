@@ -31,6 +31,10 @@ static Index<Visualizer *> visualizers;
 static int running = false;
 static int num_enabled = 0;
 
+void Visualizer::render_mono_pcm(const float * pcm) {}
+void Visualizer::render_multi_pcm(const float * pcm, int channels) {}
+void Visualizer::render_freq(const float * freq) {}
+
 EXPORT void aud_visualizer_add(Visualizer * vis)
 {
     visualizers.append(vis);
