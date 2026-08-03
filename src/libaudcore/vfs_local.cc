@@ -462,6 +462,7 @@ bool LocalTransport::get_file_timestamps(const char * filename, int64_t * mtime,
     if (birthtime)
         *birthtime = -1;
 
+#ifdef HAVE_STATX
     // Use statx on Linux to get creation time
     struct statx stx;
     if (syscall(SYS_statx, AT_FDCWD, (const char *)path, 0,
@@ -474,6 +475,7 @@ bool LocalTransport::get_file_timestamps(const char * filename, int64_t * mtime,
 
         return true;
     }
+#endif
 
     // Fallback to regular stat
     struct stat st;

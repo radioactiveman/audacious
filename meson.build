@@ -136,6 +136,16 @@ if cxx.has_function('sigwait')
 endif
 
 
+if cxx.compiles('''
+  #include <sys/stat.h>
+  int main() {
+    struct statx stx;
+    return statx(0, "", 0, STATX_MTIME | STATX_BTIME, &stx);
+  }''', name: 'statx sample')
+  conf.set10('HAVE_STATX', true)
+endif
+
+
 if meson.version().version_compare('>= 0.59')
   intl_dep = dependency('intl', required: false)
   intl_found = intl_dep.found()

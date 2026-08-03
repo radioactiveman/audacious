@@ -12,6 +12,7 @@
 
 #mesondefine HAVE_GETTEXT
 #mesondefine HAVE_SIGWAIT
+#mesondefine HAVE_STATX
 
 #mesondefine INSTALL_BINDIR
 #mesondefine INSTALL_DATADIR
